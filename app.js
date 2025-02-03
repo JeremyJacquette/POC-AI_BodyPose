@@ -7,7 +7,7 @@ let count = 0;
 let lastCountTime = 0;
 
 function setup() {
-    // Accédez à la webcam
+    
     navigator.mediaDevices.getUserMedia({ video: true, audio: false })
         .then(function(stream) {
             videoElement.srcObject = stream;
@@ -38,12 +38,12 @@ function drawCanvas() {
         let pose = poses[0].pose;
         let keypoints = pose.keypoints;
 
-        // Vérifiez si les points 10 et 9 sont au-dessus des points 2 et 1
+
         if (keypoints[10] && keypoints[9] && keypoints[2] && keypoints[1]) {
             if (keypoints[10].position.y < keypoints[2].position.y &&
                 keypoints[9].position.y < keypoints[1].position.y) {
                 let currentTime = Date.now();
-                if (currentTime - lastCountTime > 1000) { // Délai de 1 seconde
+                if (currentTime - lastCountTime > 1000) { 
                     count++;
                     lastCountTime = currentTime;
                     document.getElementById('count').innerText = count;
@@ -51,7 +51,7 @@ function drawCanvas() {
             }
         }
 
-        // Dessinez les keypoints
+
         for (let i = 0; i < keypoints.length; i++) {
             let x = keypoints[i].position.x;
             let y = keypoints[i].position.y;
@@ -63,5 +63,4 @@ function drawCanvas() {
     }
 }
 
-// Initialisez le setup
 setup();
